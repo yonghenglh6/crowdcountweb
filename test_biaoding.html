@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>test_biaoding</title>
+
+
+
+</head>
+
+<body>
+<canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;">Your browser does not support the canvas element. </canvas>
+
+<script>
+	var c=document.getElementById("myCanvas");
+	var cxt=c.getContext("2d");
+	var img=new Image()  
+	img.src="data/1.jpg"
+	img.onload = function ()   
+	{  
+    	cxt.drawImage(img,0,0);  
+	}
+	
+	var imageData = cxt.getImageData(0,0,640,480);
+	for(var i=0;i<imageData.data.length;i+=4){
+		imageData.data[i]=255;
+		imageData.data[i+1]=255;
+		imageData.data[i+2]=255;
+		imageData.data[i+3]=255;
+	}
+	cxt.putImageData(imageData,0,0);
+	
+	alert(imageData.data.length);
+	
+</script>
+
+
+<p id="signal_x"></p>
+<p id="signal_y"></p>
+<script>
+function PGGGetFileListByPathAndSuffix(folderPath, suffixes) 
+{ 
+	var  retFilesArray  =  new  Array();  
+	var  fso  =  new ActiveXObject("Scripting.FileSystemObject");  //创建FileSystemObject对象??	
+    var  Folder  =  fso.GetFolder(folderPath); //获取文件夹信息
+    // var  subFolders  =  Folder.SubFolders; 
+    var  Files  =  Folder.Files; 
+    var arrSuffix = suffixes.split("|"); //把一个字符串分割成字符串数组 
+    var  enmFiles  =  new  Enumerator(Files); //启动枚举文件集合
+    for(; !enmFiles.atEnd(); enmFiles.moveNext()) 
+    {
+        var tmpPath = enmFiles.item().Path;
+        for (x in arrSuffix)
+        {
+            if (fso.GetExtensionName(tmpPath) == arrSuffix[x].substr(2))//GetExtensionName得到文件扩展名
+            {
+                retFilesArray[retFilesArray.length]  =  tmpPath;
+                break;
+            }
+        }
+    } 
+ 
+    return  retFilesArray; 
+}
+</script>
+
+<script> 
+    // 获取当前目录
+    // location.href形如：file:///C:/.../.../filename.html
+    //var FolderPath = location.href.substring(location.href.lastIndexOf(':') - 1, location.href.lastIndexOf('/'));
+	var FolderPath = "E:/密度分析_2015/mall/background";
+	//document.writeln("<br>"+FolderPath + "<br>");
+    var arrFiles   =  PGGGetFileListByPathAndSuffix(FolderPath, "*.jpg|*.png|*.bmp|*.gif");
+    /*if (arrFiles.length == 0)
+    {
+        alert("There isn't any pictures in directionary: \n" + FolderPath + ".");
+    }
+    for (x in arrFiles)
+    {
+        document.write("<a href=" + arrFiles[x] +" ><img src=" + arrFiles[x] + " alt=Failed! width=240 height=180 /></a>");
+    }*/
+    document.close();
+</script>
+
+
+<script>	
+	document.getElementById("myCanvas").onclick = function(){positionObj(event,"myCanvas")};
+	function positionObj(event,id){
+		var thisX = document.getElementById(id).offsetLeft;
+		var thisY = document.getElementById(id).offsetTop;
+		x = event.clientX - thisX;
+		y = event.clientY - thisY;
+		document.getElementById("signal_x").innerHTML=x;
+		document.getElementById("signal_y").innerHTML=y;
+	}
+</script>
+
+</body>
+</html>

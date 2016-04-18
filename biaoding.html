@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>biaoding</title>
+</head>
+
+<body>
+<canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;">Your browser does not support the canvas element. </canvas>
+<script>
+	var c=document.getElementById("myCanvas");
+	var cxt=c.getContext("2d");
+	var img=new Image() 
+	img.src="file://E:/网页开发/demo2/data/1.jpg";
+	img.onload=function(){
+    	cxt.drawImage(img,0,0);  
+
+		var imageData = cxt.getImageData(0,0,640,480);
+		for(var i=0;i<imageData.data.length;i+=4){
+		imageData.data[i]=255;
+		imageData.data[i+1]=255;
+		imageData.data[i+2]=0;
+		imageData.data[i+3]=255;
+	}
+	cxt.putImageData(imageData,0,0);
+		
+		}
+
+</script>
+
+<p id="signal_x"></p>
+<p id="signal_y"></p>
+
+<script>	
+//	document.getElementById("myCanvas").onclick = function(){positionObj(event,"myCanvas")};
+//	function positionObj(event,id){
+//		var thisX = document.getElementById(id).offsetLeft;
+//		var thisY = document.getElementById(id).offsetTop;
+//		x = event.clientX - thisX;
+//		y = event.clientY - thisY;
+//		document.getElementById("signal_x").innerHTML=x;
+//		document.getElementById("signal_y").innerHTML=y;
+//	}
+</script>
+
+</body>
+</html>
