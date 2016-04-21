@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>密度分析</title>
+<link rel="stylesheet" type="text/css" href="css/button.css">
+<style type="text/css">
+	html,body,header,aside,section,footer,form,fieldset,legend,ol,li{
+		margin:0;
+		padding:0;
+	}
+	body{
+		background:#ffffff;
+		color:#111111;
+		padding:20px;
+	}
+	header{
+	  background: #ffffff;
+	  -webkit-border-radius: 5px;
+	  width: 700px;
+	  margin:auto;
+	}
+	
+	article{
+	  background: #ffffff;
+	  -webkit-border-radius: 5px;
+	  width: 700px;
+	  margin:auto;
+	}
+	
+	aside{
+		background:#ffffff;
+		color:#111111;
+		padding:20px;
+		float:left; /*设置横排*/
+		width:120px;
+		height:450px;		
+	}
+	
+	aside button{
+		margin:20px;
+	}
+	
+	aside fieldset{
+		margin-bottom:10px;
+		padding:20px;
+		border-radius:5px;
+		border:solid 2px #1482B0;
+	}
+	aside fieldset legend{
+		color:#1482B0;
+		font-size:14px;
+		font-weight:bold;	
+	}
+	aside fieldset ol li{
+		background:#ffffff;
+		border-color:#44AED4;
+		list-style:none;
+		border-style:solid;
+		border-width:2px;
+		border-radius:5px;
+		padding:5px 10px;
+		margin-bottom:10px;
+	}
+	
+	aside label{
+		font-size:12px;
+		width:110px;
+	}
+	
+	section{
+		background:#ffffff;
+		color:#111111;
+		float:right; /*设置横排*/
+		width:500px;
+		height:450px;
+	    margin:auto;		
+	}
+	section fieldset{
+		background:#ffffff;
+		border-color:#1482B0;
+		border-radius:5px;
+		padding:10px;
+		margin-bottom:10px;
+	}
+	
+	section legend{
+		color:#1482B0;
+		font-size:14px;
+		font-weight:bold;
+	}
+	
+	section ol li{
+		list-style:none;
+		padding:5px 10px;
+	}
+	section label{
+		float:left;
+		font-size:12px;
+		width:110px;
+	}
+	
+	section input([type=txt]),section input([type=number]){
+		background:#ffffff;
+		border:#fc3 solid 1px;
+		outline:none;
+		padding:5px;
+		width:200px;
+	}
+	
+	section fieldset fieldset button{
+		margin-left:50px;
+		margin-right:50px;
+	}
+	
+	footer{
+		clear:both;
+		background-color:#346699;
+		color:#ffffff;
+		width:700px;
+	    margin:auto;
+	}
+	foot image{
+		
+	}
+</style>
+</head>
+
+<body>
+    <header>
+        <image src="image/top.jpg" style="max-width:100%"/>
+    </header>
+    <article>
+    <aside>	
+        <button id="new_task" type="button">新建任务</button>
+        <fieldset id="task">
+            <legend>摄像机任务</legend>
+            <ol>
+                <li>
+                    <label>Task 1</label>
+                </li>
+                <li>
+                    <label>Task 2</label>
+                </li>
+                <li>
+                    <label>Task 3</label>
+                </li>
+            </ol>
+        </fieldset>
+    </aside>
+    <section>
+            <fieldset>
+                <legend>初始化</legend>
+                <fieldset>
+                  <ol>
+                      <li>
+                          <label>训练目录：</label>
+                          <input id="traindir" name="traindir" type="text" placeholder="请输入训练图片的目录" required>
+                      </li>
+                      <li>
+                          <label>预测目录：</label>
+                          <input id="predictdir" name="predictdir" type="text" placeholder="请输入预测图片的目录" required>
+                      </li>
+                      <li>
+                          <label>背景文件：</label>
+                          <input id="background_picture" name="background_picture" type="text" >
+                      </li>
+                      <li>
+                          <label>行&nbsp;&nbsp;数&nbsp;&nbsp;目：</label>
+                          <input id="rows" name="rows" type="number" required>
+                      </li>
+                      <li>
+                          <label>列&nbsp;&nbsp;数&nbsp;&nbsp;目：</label>
+                          <input id="columns" name="columns" type="number" required>
+                      </li>                                                       
+                  </ol>
+               </fieldset>
+               <fieldset>
+                  <ol>
+                      <li>
+                          <button type="button">启动标定程序</button>
+                          <button type="button">保存并开始运行</button>
+                      </li>
+  
+                  </ol>
+                </fieldset>
+            </fieldset>
+            <fieldset>
+                <legend>查看结果</legend>
+                <ol>
+                  <li>
+                      <button type="button">前景图</button>
+                  </li>
+                  <li>
+                      <button type="button">密度图</button>
+                  </li>
+                  <li>
+                      <button type="button">热力图</button>
+                  </li>
+                </ol>
+            </fieldset>
+    </section>
+    </article>
+    <footer>
+        <image src="image/foot.png" style="max-width:100%"/>
+    </footer>
+</body>
+</html>

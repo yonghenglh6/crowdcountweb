@@ -1,52 +1,234 @@
+$def with (tasks)
+<script>
+
+
+</script>
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>setting</title>
-<link href="static/css/style.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>setting</title>
+    <link rel="stylesheet" type="text/css" href="static/css/button.css">
+
+    <link href="static/css/style.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+	html,body,header,aside,section,footer,form,fieldset,legend,ol,li{
+		margin:0;
+		padding:0;
+	}
+	body{
+		background:#ffffff;
+		color:#111111;
+		padding:20px;
+	}
+	header{
+	  background: #ffffff;
+	  -webkit-border-radius: 5px;
+	  width: 700px;
+	  margin:auto;
+	}
+
+	article{
+	  background: #ffffff;
+	  -webkit-border-radius: 5px;
+	  width: 700px;
+	  margin:auto;
+	}
+
+	aside{
+		background:#ffffff;
+		color:#111111;
+		padding:20px;
+		float:left; /*设置横排*/
+		width:120px;
+		height:450px;
+	}
+
+	aside button{
+		margin:20px;
+	}
+
+	aside fieldset{
+		margin-bottom:10px;
+		padding:20px;
+		border-radius:5px;
+		border:solid 2px #1482B0;
+	}
+	aside fieldset legend{
+		color:#1482B0;
+		font-size:14px;
+		font-weight:bold;
+	}
+	aside fieldset ol li{
+		background:#ffffff;
+		border-color:#44AED4;
+		list-style:none;
+		border-style:solid;
+		border-width:2px;
+		border-radius:5px;
+		padding:5px 10px;
+		margin-bottom:10px;
+	}
+
+	aside label{
+		font-size:12px;
+		width:110px;
+	}
+
+	section{
+		background:#ffffff;
+		color:#111111;
+		float:right; /*设置横排*/
+		width:500px;
+		height:450px;
+	    margin:auto;
+	}
+	section fieldset{
+		background:#ffffff;
+		border-color:#1482B0;
+		border-radius:5px;
+		padding:10px;
+		margin-bottom:10px;
+	}
+
+	section legend{
+		color:#1482B0;
+		font-size:14px;
+		font-weight:bold;
+	}
+
+	section ol li{
+		list-style:none;
+		padding:5px 10px;
+	}
+	section label{
+		float:left;
+		font-size:12px;
+		width:110px;
+	}
+
+	section input([type=txt]),section input([type=number]){
+		background:#ffffff;
+		border:#fc3 solid 1px;
+		outline:none;
+		padding:5px;
+		width:200px;
+	}
+
+	section fieldset fieldset button{
+		margin-left:50px;
+		margin-right:50px;
+	}
+
+	#footer{
+	    float:left;
+	}
+	foot image{
+
+	}
+
+
+    </style>
 </head>
 
 <body>
 
 <!-- Header -->
 <div id="header">
-	<div class="shell">
-		
-		<!-- Logo -->
-		<!--<h1 id="logo"><a href="#"></a></h1>-->
-		<!-- End Logo -->
-		
-		<!-- Navigation -->
-		<div id="navigation">
-			<ul>
-			    <li><a href="index.html">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</a></li>
+    <div class="shell">
+
+        <!-- Logo -->
+        <!--<h1 id="logo"><a href="#"></a></h1>-->
+        <!-- End Logo -->
+
+        <!-- Navigation -->
+        <div id="navigation">
+            <ul>
+                <li><a href="index.html">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</a></li>
                 <li><a href="#">帮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;助</a></li>
-			</ul>
-		</div>
-		<!-- End Navigation -->
-		
-	</div>
+            </ul>
+        </div>
+        <!-- End Navigation -->
+
+    </div>
 </div>
 <!-- End Header -->
 
 <div id="main">
-	
+
+    <article>
+        <aside>
+            <fieldset id="task">
+                <legend>任务列表</legend>
+                <ol>
+                    $for i in range(len(tasks)):
+                        <li>
+                            <label>Task $i:$tasks[i]['traindir'] <a href="biaoding.html?">详情</a><br/><a href="">启动</a></label>
+                        </li>
+
+                </ol>
+            </fieldset>
+        </aside>
+        <section>
+            <fieldset>
+                <form action="setting.html?action=newtask" method="post">
+                    <legend>新建任务</legend>
+                    <fieldset>
+
+                        <ol>
+                            <li>
+                                <label>训练UID：</label>
+                                <input id="traindir" name="traindir" type="text" placeholder="请输入训练图片的目录" required>
+                            </li>
+                            <li>
+                                <label>预测UID：</label>
+                                <input id="predictdir" name="predictdir" type="text" placeholder="请输入预测图片的目录" required>
+                            </li>
+                            <li>
+                                <label>背景UID：</label>
+                                <input id="background_picture" name="background_picture" type="text">
+                            </li>
+                            <li>
+                                <label>行&nbsp;&nbsp;数&nbsp;&nbsp;目：</label>
+                                <input id="rows" name="rows" type="number" required>
+                            </li>
+                            <li>
+                                <label>列&nbsp;&nbsp;数&nbsp;&nbsp;目：</label>
+                                <input id="columns" name="columns" type="number" required>
+                            </li>
+                        </ol>
+
+                    </fieldset>
+                    <fieldset>
+                        <ol>
+                            <li>
+                                <input type="submit" />
+                            </li>
+
+                        </ol>
+                    </fieldset>
+                </form>
+            </fieldset>
+
+        </section>
+    </article>
+
 </div>
 
 <!-- Footer -->
 <div id="footer">
-	<div class="shell">
-    	<p class="left">
-			<a href="#">地址</a>
-			<span>|</span>
-			<a href="#">邮编</a>
+    <div class="shell">
+        <p class="left">
+            <a href="#">地址</a>
             <span>|</span>
-			<a href="#">电话</a>
-			<span>|</span>
-			<a href="#">邮箱</a>
-		</p>
-		<p class="right">&copy; Company Name. </p>
-	</div>
+            <a href="#">邮编</a>
+            <span>|</span>
+            <a href="#">电话</a>
+            <span>|</span>
+            <a href="#">邮箱</a>
+        </p>
+        <p class="right">&copy; Company Name. </p>
+    </div>
 </div>
 <!-- End Footer -->
 
