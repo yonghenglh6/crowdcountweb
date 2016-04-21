@@ -3,6 +3,8 @@
 import web
 import pickle
 import os
+import string
+
 urls = ("/", "index",
         "/biaoding\.html", "biaoding",
         "/help\.html", "help",
@@ -19,13 +21,29 @@ class index:
 
 class biaoding:
     def GET(self):
-        i = web.input(shujuji="default", picid="default")
-        picurl = r"./static/data/1.jpg";
-        output = {};
-        output['shujuji'] = i.shujuji;
-        output['picid'] = i.picid;
-        output['picurl'] = picurl;
-        return render.biaoding(output)
+        i = web.input(subpage="0", pagenum="1",taskid="-1")
+        if(i.taskid=="-1"):
+            return "NO this Task";
+        pagenum=string.atoi(i.pagenum);
+        mtask=TaskManager.get(string.atoi(i.taskid));
+        traindir=mtask['traindir'];
+        print 'static/data/'+traindir
+        if os.path.exists('static/data/'+traindir):
+            files=os.listdir('static/data/'+traindir);
+            print len(files)
+            print files
+            picurl = 'static/data/'+traindir+"/"+files[pagenum];
+            print picurl;
+            output = {};
+            output['IImagePath'] = picurl;
+            output['taskid'] = i.taskid;
+            output['pagenum'] = i.pagenum;
+            output['sumpage'] = len(files);
+            output['subpage'] = i.subpage;
+            return render.biaoding(output)
+        else:
+            return "任务配置错误";
+
 
     def POST(self):
         id = 10;

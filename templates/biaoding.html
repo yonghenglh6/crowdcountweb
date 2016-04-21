@@ -1,21 +1,38 @@
 $def with (output)
 <!doctype html>
-<script>
+<script type="text/javascript">
 	//Init
 	//var IImagePath="E:\网页开发\demo3\static\data\1.jpg";
-    var IImagePath="static/data/1.jpg";
-	var taskid=1;
-	var pagenum=3;
-	var sumpage=10;
-	var subpage=1;
-	
-	
+    window.IImagePath="$output['IImagePath']";
+	var taskid=$output['taskid'];
+	var pagenum=$output['pagenum'];
+	var sumpage=$output['sumpage'];
+
+
+
+	window.subpage=$output['subpage'];
+
+
 	function PrePgae(){
-		if(pagenum<=1){}
-		else{
-			window.location.herf = "biaoding.html?subpage="+subpage"&pagenum="+pagenum+"&taskid="+taskid;
-			}	
+		if(pagenum<=1){
+
 		}
+		else{
+		    pagenum=pagenum-1;
+		    loadurl(window.subpage,pagenum);
+		}
+	}
+
+		function loadurl(subpage,pagenum){
+		        if(subpage==window.subpage){
+            }else{
+            alert("biaoding.html?subpage="+subpage+"&pagenum=1&taskid="+taskid);
+		    window.location.herf = "biaoding.html?subpage="+subpage+"&pagenum=1&taskid="+taskid;
+            alert("biaoding.html?subpage="+subpage+"&pagenum=1&taskid="+taskid);
+		    }
+		}
+
+
 </script>
 
 
@@ -56,9 +73,9 @@ $def with (output)
 <div id="main">
     <div id="TabMain">
         <div class="tabItemContainer">
-            <li><a class="tabItemCurrent">当前任务</a></li>
-            <li><a>标定人数</a></li>
-            <li><a>标定灭点</a></li>
+            <li><a class="tabItemCurrent" onclick="loadurl(0,1)">当前任务</a></li>
+            <li><a onclick="loadurl(1,1)">标定人数</a></li>
+            <li><a onclick="loadurl(2,1)">标定灭点</a></li>
         </div>
         <div class="tabBodyContainer">
             <div class="tabBodyItem tabBodyCurrent">
@@ -66,15 +83,15 @@ $def with (output)
                 <p></p>
             </div>
             <div class="tabBodyItem">
-            
-                <canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;" >Your browser does not
+
+                <canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;">Your browser does not
                     support the canvas element.
                 </canvas>
                 <p>显示当前点坐标：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p id="signal_x" ></p>
+                <p id="signal_x"></p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p id="signal_y" ></p>
-                <div class="clear"></div> 
+                <p id="signal_y"></p>
+                <div class="clear"></div>
                 <button type="button">上一张</button>
                 <button type="button">下一张</button>
             </div>

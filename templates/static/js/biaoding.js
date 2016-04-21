@@ -65,8 +65,8 @@ return offset;
         c=document.getElementById("myCanvas");
         cxt=c.getContext("2d");
         img=new Image()
-        img.src="static/data/1.jpg";
-
+        img.src=window.IImagePath;
+        //img.src="static/data/1.jpg";
         img.onload=function(){
             cxt.drawImage(img,0,0);
         }
@@ -91,15 +91,17 @@ return offset;
 
 
 $(document).ready(function(e) {
-	SidebarTabHandler.Init();
-});
-var SidebarTabHandler={
-	Init:function(){
-		$(".tabItemContainer>li").click(function(){
-			$(".tabItemContainer>li>a").removeClass("tabItemCurrent");
+    subpage=window.subpage;
+                $(".tabItemContainer>li>a").removeClass("tabItemCurrent");
 			$(".tabBodyItem").removeClass("tabBodyCurrent");
-			$(this).find("a").addClass("tabItemCurrent");
-			$($(".tabBodyItem")[$(this).index()]).addClass("tabBodyCurrent");
-		});
-	}
-}
+    if(subpage==0){
+			$($(".tabItemContainer>li")[0]).find("a").addClass("tabItemCurrent");
+			$($(".tabBodyItem")[0]).addClass("tabBodyCurrent");
+    }else if(subpage==1){
+			$($(".tabItemContainer>li")[1]).find("a").addClass("tabItemCurrent");
+			$($(".tabBodyItem")[1]).addClass("tabBodyCurrent");
+    }else if (subpage==2){
+			$($(".tabItemContainer>li")[2]).find("a").addClass("tabItemCurrent");
+			$($(".tabBodyItem")[1]).addClass("tabBodyCurrent");
+    }
+});

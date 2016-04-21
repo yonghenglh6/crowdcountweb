@@ -59,11 +59,7 @@
     margin-top: 10px;
 	float:left;
 }
-#myCanvas{
-	text-align:center;
-	margin:0 auto;
-	padding-left:25px;
-}
+
 
 .tabBodyItem>p>a {
     text-decoration: none;

@@ -8,14 +8,24 @@
 	var cxt;
 	var img;
 
+	
+	function getTop(e){ 
+var offset=e.offsetTop; 
+if(e.offsetParent!=null) offset+=getTop(e.offsetParent); 
+return offset; 
+} 
+//获取元素的横坐标 
+function getLeft(e){ 
+var offset=e.offsetLeft; 
+if(e.offsetParent!=null) offset+=getLeft(e.offsetParent); 
+return offset; 
+} 
+	
 	//	document.getElementById("myCanvas").onclick = function(){positionObj(event,"myCanvas")};
 	function positionObj(event,id){
-		var thisX = document.getElementById(id).offsetLeft;
-		var thisY = document.getElementById(id).offsetTop;
-		alert(event.clientX);
-		alert(thisX);
-		alert(event.clientY);
-		alert(thisY);
+		var thisX = getLeft(document.getElementById(id));
+		var thisY = getTop(document.getElementById(id));
+
 		x = event.clientX - thisX;
 		y = event.clientY - thisY;
 		document.getElementById("signal_x").innerHTML=x;
@@ -55,8 +65,8 @@
         c=document.getElementById("myCanvas");
         cxt=c.getContext("2d");
         img=new Image()
-        img.src=IImagePath;
-
+        img.src=window.IImagePath;
+        //img.src="static/data/1.jpg";
         img.onload=function(){
             cxt.drawImage(img,0,0);
         }
@@ -80,33 +90,18 @@
 	}
 
 
-	function post(URL,data){
-		var temp = document.createElement("form");
-		temp.action = URL;
-		temp.method = "post";
-		temp.style.display = "none";
-		alert(1);
-		for(var x in data){
-			var opt = document.createElement("input");
-			opt.name = x;
-			opt.value = data[x];
-			temp.appendChild(opt);
-		}
-		document.body.appendChild(temp);
-		temp.submSit();
-		return temp;
-	}
-
 $(document).ready(function(e) {
-	SidebarTabHandler.Init();
-});
-var SidebarTabHandler={
-	Init:function(){
-		$(".tabItemContainer>li").click(function(){
-			$(".tabItemContainer>li>a").removeClass("tabItemCurrent");
+    subpage=window.subpage;
+                $(".tabItemContainer>li>a").removeClass("tabItemCurrent");
 			$(".tabBodyItem").removeClass("tabBodyCurrent");
-			$(this).find("a").addClass("tabItemCurrent");
-			$($(".tabBodyItem")[$(this).index()]).addClass("tabBodyCurrent");
-		});
-	}
-}
+    if(subpage==0){
+			$($(".tabItemContainer>li")[0]).find("a").addClass("tabItemCurrent");
+			$($(".tabBodyItem")[0]).addClass("tabBodyCurrent");
+    }else if(subpage==1){
+			$($(".tabItemContainer>li")[1]).find("a").addClass("tabItemCurrent");
+			$($(".tabBodyItem")[1]).addClass("tabBodyCurrent");
+    }else if (subpage==2){
+			$($(".tabItemContainer>li")[2]).find("a").addClass("tabItemCurrent");
+			$($(".tabBodyItem")[1]).addClass("tabBodyCurrent");
+    }
+});
