@@ -105,3 +105,12 @@ $(document).ready(function(e) {
 			$($(".tabBodyItem")[1]).addClass("tabBodyCurrent");
     }
 });
+function starttask(){
+    $.post("biaoding.html?action=begintask&taskid="+window.taskid,{},function(data,status){
+        alert(data);
+    });
+}
+function stoptask(){
+    $.post("biaoding.html?action=endtask&taskid="+window.taskid,{},function(data,status){
+    alert(data);});
+}

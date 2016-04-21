@@ -40,14 +40,23 @@ class biaoding:
             output['pagenum'] = i.pagenum;
             output['sumpage'] = len(files);
             output['subpage'] = i.subpage;
+            output['traindirReal'] = 'static/data/'+traindir;
+            output['task'] = mtask;
             return render.biaoding(output)
         else:
             return "任务配置错误";
 
 
     def POST(self):
-        id = 10;
-        return "";
+        i = web.input(action="",  taskid="-1")
+        taskid=string.atoi(i.taskid);
+        if i.action=="begintask" and taskid!=-1:
+            TaskManager.starttask(taskid);
+            return 'success';
+        if i.action == "endtask" and taskid != -1:
+            TaskManager.endtask(taskid);
+            return 'success';
+        return "failure";
 
 
 class help:
@@ -65,7 +74,7 @@ class setting:
     def POST(self):
         i = web.input(action="none", traindir="", predictdir="", background_picture="", rows="", columns="");
         if i.action=="newtask":
-            ntask={"traindir":i.traindir, "predictdir":i.predictdir, "background_picture":i.background_picture, "rows":i.rows, "columns":i.columns};
+            ntask={"traindir":i.traindir, "predictdir":i.predictdir, "background_picture":i.background_picture, "rows":i.rows, "columns":i.columns,"status":0};
             TaskManager.add(ntask);
         return render.setting(TaskManager.get());
 
@@ -88,6 +97,13 @@ class MTaskManager:
             return self.tasks;
         else:
             return self.tasks[id]
+    def starttask(self,id=-1):
+        if id != -1:
+            self.tasks[id]['status']=1;
+
+    def endtask(self, id=-1):
+        if id != -1:
+            self.tasks[id]['status'] = 0;
 TaskManager= MTaskManager();
 if __name__ == "__main__":
     app.run()
