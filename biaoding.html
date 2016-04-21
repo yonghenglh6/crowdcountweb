@@ -45,11 +45,17 @@
         </div>
         <div class="tabBodyItem">
             <canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;">Your browser does not support the canvas element. </canvas>
-			<p>显示当前点坐标</p>
+			<ul>
+            <li>
+            <p>显示当前点坐标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 			<p id="signal_x"></p>
-			<p id="signal_y"></p>
+            <p id="signal_y"></p>
+            </li>
+            <li>
 			<button type="button">上一张</button>
-			<button type="button">下一张</button>
+			</li><li>
+            <button type="button">下一张</button>
+        	</li></ul>
         </div>
         <div class="tabBodyItem">
             <p></p>
@@ -95,10 +101,12 @@
 <script>	
 //	document.getElementById("myCanvas").onclick = function(){positionObj(event,"myCanvas")};
 	function positionObj(event,id){
-		var thisX = document.getElementById(id).offsetLeft;
-		var thisY = document.getElementById(id).offsetTop;
-		x = event.clientX - thisX;
-		y = event.clientY - thisY;
+		//var thisX = document.getElementById(id).offsetLeft;
+		//var thisY = document.getElementById(id).offsetTop;
+		//x = event.clientX - thisX;
+		//y = event.clientY - thisY;
+		var x=event.pageX || (event.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft));
+ 		var y=event.pageY || (event.clientY + (document.documentElement.scrollTop || document.body.scrollTop));
 		document.getElementById("signal_x").innerHTML=x;
 		document.getElementById("signal_y").innerHTML=y;
 		
