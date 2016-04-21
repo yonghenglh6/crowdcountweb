@@ -1,19 +1,18 @@
 @charset "utf-8";
 /* CSS Document */
 #TabMain {
-    width: 800px;
-    height: 500px;
+    width: 850px;
+    height: 550px;
     margin: 0 auto;
-    margin-top: 100px;
 }
 .tabItemContainer {
     width: 100px;
-    height: 500px;
+    height: 550px;
     float: left;
 }
 .tabBodyContainer {
-    width: 677px;
-    height: 500px;
+    width: 700px;
+    height: 550px;
     float: left;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -57,8 +56,15 @@
 .tabBodyItem>p {
     font: 13px "微软雅黑", Arial, Helvetica, sans-serif;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 10px;
+	float:left;
 }
+#myCanvas{
+	text-align:center;
+	margin:0 auto;
+	padding-left:25px;
+}
+
 .tabBodyItem>p>a {
     text-decoration: none;
     color: #0F3;
