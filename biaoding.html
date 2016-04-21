@@ -8,40 +8,98 @@
 <body>
 <canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;">Your browser does not support the canvas element. </canvas>
 <script>
+
+	var points=new Array();
+	var sign=0;
 	var c=document.getElementById("myCanvas");
 	var cxt=c.getContext("2d");
 	var img=new Image() 
 	img.src="file://E:/网页开发/demo2/data/1.jpg";
 	img.onload=function(){
-    	cxt.drawImage(img,0,0);  
-
-		var imageData = cxt.getImageData(0,0,640,480);
-		for(var i=0;i<imageData.data.length;i+=4){
-		imageData.data[i]=255;
-		imageData.data[i+1]=255;
-		imageData.data[i+2]=0;
-		imageData.data[i+3]=255;
+    	cxt.drawImage(img,0,0);	
 	}
-	cxt.putImageData(imageData,0,0);
-		
-		}
-
 </script>
 
 <p id="signal_x"></p>
 <p id="signal_y"></p>
+<button type="button" onlick="post("help.html",points)">click me!</button>
 
 <script>	
 //	document.getElementById("myCanvas").onclick = function(){positionObj(event,"myCanvas")};
-//	function positionObj(event,id){
-//		var thisX = document.getElementById(id).offsetLeft;
-//		var thisY = document.getElementById(id).offsetTop;
-//		x = event.clientX - thisX;
-//		y = event.clientY - thisY;
-//		document.getElementById("signal_x").innerHTML=x;
-//		document.getElementById("signal_y").innerHTML=y;
-//	}
+	function positionObj(event,id){
+		var thisX = document.getElementById(id).offsetLeft;
+		var thisY = document.getElementById(id).offsetTop;
+		x = event.clientX - thisX;
+		y = event.clientY - thisY;
+		document.getElementById("signal_x").innerHTML=x;
+		document.getElementById("signal_y").innerHTML=y;
+		
+		points[sign]=new Array();
+		points[sign][0]=x;
+		points[sign][1]=y;
+		sign+=1;
+		drawpoints();
+//		var imageData = cxt.getImageData(0,0,640,480);
+//		var i=y*640*4+x*4;
+//		imageData.data[i]=255;
+//		imageData.data[i+1]=0;
+//		imageData.data[i+2]=0;
+//		imageData.data[i+3]=255;	
+//		cxt.putImageData(imageData,0,0);
+	}
 </script>
 
+<script>
+	function drawpoints(){
+		cxt.fillStyle="ffffff";
+		cxt.fillRect(0,0,640,480);
+		cxt.drawImage(img,0,0);
+		for(var i=0;i<sign;i++){			
+			cxt.beginPath();			
+			cxt.fillStyle="#FF0000";
+			cxt.arc(points[i][0],points[i][1],2,0,Math.PI*2,true);
+			cxt.closePath();
+			cxt.fill();
+		}
+	}
+</script>
+
+<script>
+	window.onload = function(){
+    	document.oncontextmenu = function(event){
+               event.preventDefault();
+        };
+		document.getElementById("myCanvas").onmousedown = function(event){
+			if(event.button == 2)
+			{
+				if(sign!=0){
+					sign-=1;
+				}
+				drawpoints();
+			}else if(event.button == 0){
+				positionObj(event,"myCanvas");
+			}
+		}			
+	}	
+</script>
+
+<script>
+	function post(URL,data){
+		var temp = document.createElement("form");
+		temp.action = URL;
+		temp.method = "post";
+		temp.style.display = "none";
+		alert(1);
+		for(var x in data){
+			var opt = document.createElement("input");
+			opt.name = x;
+			opt.value = data[x];
+			temp.appendChild(opt);
+		}
+		document.body.appendChild(temp);
+		temp.submSit();
+		return temp;	
+	}
+</script>
 </body>
 </html>
