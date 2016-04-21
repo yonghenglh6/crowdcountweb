@@ -2,9 +2,20 @@ $def with (output)
 <!doctype html>
 <script>
 	//Init
-	//var IImagePath="E:\网页开发\demo2\templates\static\data/1.jpg";
+	//var IImagePath="E:\网页开发\demo3\static\data\1.jpg";
     var IImagePath="static/data/1.jpg";
-
+	var taskid=1;
+	var pagenum=3;
+	var sumpage=10;
+	var subpage=1;
+	
+	
+	function PrePgae(){
+		if(pagenum<=1){}
+		else{
+			window.location.herf = "biaoding.html?subpage="+subpage"&pagenum="+pagenum+"&taskid="+taskid;
+			}	
+		}
 </script>
 
 
@@ -15,7 +26,6 @@ $def with (output)
     <link rel="stylesheet" href="static/css/style_cebian.css" type="text/css" media="all"/>
 
     <script type="text/javascript" src="http://www.pengyaou.com/jquery-1.4.min.js"></script>
-    <script src="static/js/cebian.js" type="text/javascript"></script>
     <script src="static/js/biaoding.js" type="text/javascript"></script>
     <title>density estimation</title>
 </head>
@@ -56,12 +66,15 @@ $def with (output)
                 <p></p>
             </div>
             <div class="tabBodyItem">
-                <canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;">Your browser does not
+            
+                <canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;" >Your browser does not
                     support the canvas element.
                 </canvas>
-                <p>显示当前点坐标</p>
-                <p id="signal_x"></p>
-                <p id="signal_y"></p>
+                <p>显示当前点坐标：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <p id="signal_x" ></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <p id="signal_y" ></p>
+                <div class="clear"></div> 
                 <button type="button">上一张</button>
                 <button type="button">下一张</button>
             </div>
