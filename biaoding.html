@@ -2,11 +2,84 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>biaoding</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/style_cebian.css" type="text/css" media="all" />
+<script src="js/cebian.js" type="text/javascript"></script>
+<title>density estimation</title>
 </head>
 
 <body>
-<canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;">Your browser does not support the canvas element. </canvas>
+<!-- Header -->
+<div id="header">
+	<div class="shell">
+		
+		<!-- Logo -->
+		<!--<h1 id="logo"><a href="#"></a></h1>-->
+		<!-- End Logo -->
+		
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a href="index.html">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</a></li>
+                <li><a href="#">帮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;助</a></li>
+			</ul>
+		</div>
+		<!-- End Navigation -->
+		
+	</div>
+</div>
+<!-- End Header -->
+
+
+<div id="main">
+	<div id="TabMain">
+    <div class="tabItemContainer">
+        <li><a class="tabItemCurrent">当前任务</a></li>
+        <li><a>标定人数</a></li>
+        <li><a>标定灭点</a></li>
+    </div>
+    <div class="tabBodyContainer">
+        <div class="tabBodyItem tabBodyCurrent">
+            <p></p>
+            <p></p>
+        </div>
+        <div class="tabBodyItem">
+            <canvas id="myCanvas" width="640" height="480" style="border:1px solid #c3c3c3;">Your browser does not support the canvas element. </canvas>
+			<p>显示当前点坐标</p>
+			<p id="signal_x"></p>
+			<p id="signal_y"></p>
+			<button type="button">上一张</button>
+			<button type="button">下一张</button>
+        </div>
+        <div class="tabBodyItem">
+            <p></p>
+            <p></p>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<!-- Footer -->
+<div id="footer">
+	<div class="shell">
+    	<p class="left">
+			<a href="#">地址</a>
+			<span>|</span>
+			<a href="#">邮编</a>
+            <span>|</span>
+			<a href="#">电话</a>
+			<span>|</span>
+			<a href="#">邮箱</a>
+		</p>
+		<p class="right">&copy; Company Name. </p>
+	</div>
+</div>
+<!-- End Footer -->
+
+</body>
+</html>
 <script>
 
 	var points=new Array();
@@ -19,11 +92,6 @@
     	cxt.drawImage(img,0,0);	
 	}
 </script>
-
-<p id="signal_x"></p>
-<p id="signal_y"></p>
-<button type="button" onlick="post("help.html",points)">click me!</button>
-
 <script>	
 //	document.getElementById("myCanvas").onclick = function(){positionObj(event,"myCanvas")};
 	function positionObj(event,id){
@@ -101,5 +169,20 @@
 		return temp;	
 	}
 </script>
-</body>
-</html>
+
+<script type="text/javascript" src="http://www.pengyaou.com/jquery-1.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+	SidebarTabHandler.Init();
+});
+var SidebarTabHandler={
+	Init:function(){
+		$(".tabItemContainer>li").click(function(){
+			$(".tabItemContainer>li>a").removeClass("tabItemCurrent");
+			$(".tabBodyItem").removeClass("tabBodyCurrent");
+			$(this).find("a").addClass("tabItemCurrent");
+			$($(".tabBodyItem")[$(this).index()]).addClass("tabBodyCurrent");
+		});
+	}
+}
+</script>

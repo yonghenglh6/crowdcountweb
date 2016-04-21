@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="js/jquery-1.12.3.min.js" type="text/javascript"></script>
+<title>fdfdf</title>
+<style>
+.cd-side-navigation {
+ position: fixed;
+ z-index: 3;
+ top: 0;
+ left: 0;
+ height: 100vh;
+ width: 94px;
+ overflow: hidden;
+}
+.cd-side-navigation ul {
+ height: 100%;
+ overflow-y: auto;
+}
+.cd-side-navigation::before {
+ /* background color of the side navigation */
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ height: 100%;
+ width: calc(100% - 4px);
+ background-color: #131519;
+}
+.cd-side-navigation li {
+ width: calc(100% - 4px);
+}
+.cd-side-navigation a {
+ display: block;
+ position: relative;
+}
+.cd-side-navigation a::after {
+ /* 4px line to the right of the item - visible on hover */
+ content: '';
+ position: absolute;
+ top: 0;
+ right: -4px;
+ height: 100%;
+ width: 4px;
+ background-color: #83b0b9;
+ opacity: 0;
+}
+.no-touch .cd-side-navigation a:hover::after {
+ opacity: 1;
+} 
+
+.cd-section{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transform: translateX(-100%);
+  transition: transform 0s 0.5s;
+}
+.cd-section.visible {
+  /* this is the visible/selected section */
+  position: relative;
+  z-index: 2;
+  transform: translateX(0);
+  transition: transform 0.5s 0s;
+}                
+</style>
+
+
+</head>
+
+<body>
+
+<nav class="cd-side-navigation">
+  <ul>
+    <li>
+      <a href="index.html" class="selected" data-menu="index">
+        <svg><!-- svg content here --></svg>
+        Intro
+      </a>
+    </li>
+  
+    <li>
+      <!-- ... -->
+    </li>
+  
+    <!-- other list items here -->
+  </ul>
+</nav> <!-- .cd-dashboard -->
+  
+<main class="cd-main">
+  <section class="cd-section index visible">
+    <header>
+      <div class="cd-title">
+        <h2>Animated Page Transition #2</h2>
+        <span>Some text here</span>
+      </div>
+       
+      <a href="#index-content" class="cd-scroll">Scroll Down</a>
+    </header>
+  
+    <div class="cd-content" id="index-content">
+      <!-- content here -->
+    </div> <!-- .cd-content -->
+  </section> <!-- .cd-section -->
+</main> <!-- .cd-main -->
+<!-- lateral loading bar -->
+<div id="cd-loading-bar" data-scale="1" class="index"></div> 
+
+</body>
+</html>
+
+<script>
+function loadingBarAnimation() {
+  //loadingBar is the #cd-loading-bar element
+  //scaleY is the loadingBar actual scale value
+  //this is the scaleY value to cover the entire window height (100% loaded)
+  var scaleMax = loadingBar.data('scale'); 
+  if( scaleY + 1 < scaleMax) {
+    newScaleValue = scaleY + 1;
+  } 
+  // ...
+   
+  loadingBar.velocity({
+    scaleY: newScaleValue
+  }, 100, loadingBarAnimation);
+}   
+function loadNewContent(newSection) {
+  //create a new section element and insert it into the DOM (newSection is the data-menu of the selected navigation item)
+  var section = $('<section class="cd-section overflow-hidden '+newSection+'"></section>').appendTo(mainContent);
+   
+  //load the new content from the proper html file
+  section.load(newSection+'.html .cd-section > *', function(event){
+     
+    loadingBar.velocity({
+      scaleY: scaleMax //this is the scaleY value to cover the entire window height (100% loaded)
+    }, 400, function(){
+       
+      //add the .visible class to the new section element -> it will cover the old one
+      section.addClass('visible');
+  
+      var url = newSection+'.html';
+  
+      if(url!=window.location){
+            //add the new page to the window.history
+            window.history.pushState({path: url},'',url);
+        }
+  
+        // ...
+    });
+  });
+}    
+</script>
